@@ -15,29 +15,9 @@ interface CancelledProps {
 export default function Cancelled({ 
   isOpen, 
   onClose, 
-  onBack,
-  reason,
-  amount,
-  feedback
+  onBack
 }: CancelledProps) {
   if (!isOpen) return null;
-
-  const getReasonText = (reason: string) => {
-    switch (reason) {
-      case 'too-expensive':
-        return 'Too expensive';
-      case 'platform-not-helpful':
-        return 'Platform not helpful';
-      case 'not-enough-jobs':
-        return 'Not enough relevant jobs';
-      case 'decided-not-to-move':
-        return 'Decided not to move';
-      case 'other':
-        return 'Other';
-      default:
-        return 'Unknown reason';
-    }
-  };
 
   return (
     <div className={styles.overlay} onClick={onClose}>
@@ -78,12 +58,12 @@ export default function Cancelled({
             <div className={styles.textContent}>
                              <h2 className={styles.title}>Sorry to see you go, mate.</h2>
                <p className={styles.subtitle}>
-                 Thanks for being with us, and you're always welcome back.
+                 Thanks for being with us, and you&apos;re always welcome back.
                </p>
                
                <div className={styles.subscriptionDetails}>
                  <p>Your subscription is set to end on XX date.</p>
-                 <p>You'll still have full access until then. No further charges after that.</p>
+                 <p>You&apos;ll still have full access until then. No further charges after that.</p>
                </div>
                
                <div className={styles.reactivationMessage}>

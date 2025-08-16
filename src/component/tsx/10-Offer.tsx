@@ -9,15 +9,13 @@ interface OfferProps {
   onClose: () => void;
   onBack: () => void;
   onNoThanks: () => void;
-  onGet50Off?: () => void;
-
   currentPrice?: number;
   downsellPrice?: number;
   userId?: string;
   variant?: 'A' | 'B';
 }
 
-export default function Offer({ isOpen, onClose, onBack, onNoThanks, onGet50Off, currentPrice = 2500, downsellPrice = 1500, userId, variant }: OfferProps) {
+export default function Offer({ isOpen, onClose, onBack, onNoThanks, currentPrice = 2500, downsellPrice = 1500, userId, variant }: OfferProps) {
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -110,13 +108,13 @@ export default function Offer({ isOpen, onClose, onBack, onNoThanks, onGet50Off,
                 We built this to help you land the job, this makes it a little easier.
               </h3>
               <p className={styles.description}>
-                We've been there and we're here to help you.
+                We&apos;ve been there and we&apos;re here to help you.
               </p>
             </div>
             
             <div className={styles.offerBox}>
               <div className={styles.offerContent}>
-                <h4 className={styles.offerTitle}>Here's <strong>$10 off</strong> until you find a job.</h4>
+                <h4 className={styles.offerTitle}>Here&apos;s <strong>$10 off</strong> until you find a job.</h4>
                 <div className={styles.pricing}>
                   <span className={styles.newPrice}>${(downsellPrice / 100).toFixed(2)}/month</span>
                   <span className={styles.oldPrice}>${(currentPrice / 100).toFixed(2)}/month</span>
@@ -134,7 +132,7 @@ export default function Offer({ isOpen, onClose, onBack, onNoThanks, onGet50Off,
                   </p>
                 )}
                 <p className={styles.billingNote}>
-                  You won't be charged until your next billing date.
+                  You won&apos;t be charged until your next billing date.
                 </p>
               </div>
             </div>

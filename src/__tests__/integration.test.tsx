@@ -68,7 +68,7 @@ jest.mock('../lib/config', () => ({
 
 describe('Complete Cancellation Flow Integration', () => {
   const mockOnClose = jest.fn()
-  const mockUseABTesting = require('../lib/use-ab-testing').useABTesting
+  const mockUseABTesting = jest.requireMock('../lib/use-ab-testing').useABTesting
 
   beforeEach(() => {
     jest.clearAllMocks()
@@ -286,3 +286,4 @@ describe('Complete Cancellation Flow Integration', () => {
     })
   })
 })
+

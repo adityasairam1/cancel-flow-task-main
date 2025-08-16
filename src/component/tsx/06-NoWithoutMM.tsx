@@ -111,10 +111,10 @@ export default function NoWithoutMM({ isOpen, onClose, onBack }: NoWithoutMMProp
           <div className={styles.formTextSection}>
             <div className={styles.textContent}>
               <h3 className={styles.title}>
-                You landed the job! That's what we live for.
+                You landed the job! That&apos;s what we live for.
               </h3>
               <p className={styles.subdescription}>
-                Even if it wasn't through Migrate Mate, let us help get your visa sorted.
+                Even if it wasn&apos;t through Migrate Mate, let us help get your visa sorted.
               </p>
               
               <div className={styles.questionGroup}>

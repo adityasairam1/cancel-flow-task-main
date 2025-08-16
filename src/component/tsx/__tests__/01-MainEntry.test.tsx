@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import CancelPopup from '../01-MainEntry'
 
@@ -44,7 +44,7 @@ jest.mock('../../../lib/config', () => ({
 
 describe('CancelPopup', () => {
   const mockOnClose = jest.fn()
-  const mockUseABTesting = require('../../../lib/use-ab-testing').useABTesting
+  const mockUseABTesting = jest.requireMock('../../../lib/use-ab-testing').useABTesting
 
   beforeEach(() => {
     jest.clearAllMocks()
@@ -208,3 +208,4 @@ describe('CancelPopup', () => {
     expect(screen.getByText('Hey mate,')).toBeInTheDocument()
   })
 })
+

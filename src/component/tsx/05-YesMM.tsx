@@ -100,7 +100,7 @@ export default function YesMM({ isOpen, onClose, onBack, onComplete, hasLawyer }
           <div className={styles.formTextSection}>
             <div className={styles.textContent}>
               <h3 className={styles.title}>
-                We helped you land the job, now let's help you secure your visa.
+                We helped you land the job, now let&apos;s help you secure your visa.
               </h3>
               
               <div className={styles.lawyerQuestionGroup}>

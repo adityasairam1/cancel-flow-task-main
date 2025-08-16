@@ -29,7 +29,7 @@ export function useABTesting(userId: string) {
     }
 
     initializeABTesting();
-  }, [userId]);
+  }, [userId, initializeABTesting]);
 
   const initializeABTesting = async () => {
     try {

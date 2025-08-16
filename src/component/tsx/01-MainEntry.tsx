@@ -13,7 +13,7 @@ import SubscriptionPopup from './12-SubscriptionPopup';
 import Reasons from './14-reasons';
 import Cancelled from './15-Cancelled';
 import { useABTesting } from '../../lib/use-ab-testing';
-import { getConfig, getPrimaryOffer } from '../../lib/config';
+import { getConfig } from '../../lib/config';
 import { useAnalytics, analytics } from '../../lib/analytics';
 import { useResponsive } from '../../lib/responsive';
 

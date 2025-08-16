@@ -66,12 +66,12 @@ export default function CancellationSuccess({ isOpen, onClose, visaType, hasLawy
           <div className={styles.textSection}>
             <div className={styles.textContent}>
               <h3 className={styles.title}>
-                All done, your cancellation's been processed.
+                All done, your cancellation&apos;s been processed.
               </h3>
               
               <div className={styles.congratulatoryMessage}>
                 <p className={styles.messageText}>
-                  We're stoked to hear you've landed a job and sorted your visa. Big congrats from the team. 🙌
+                  We&apos;re stoked to hear you&apos;ve landed a job and sorted your visa. Big congrats from the team. 🙌
                 </p>
               </div>
             </div>

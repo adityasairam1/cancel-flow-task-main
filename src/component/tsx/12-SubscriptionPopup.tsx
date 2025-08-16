@@ -43,11 +43,11 @@ export default function SubscriptionPopup({ isOpen, onClose, onBack }: Subscript
             <div className={styles.textContent}>
               <h3 className={styles.title}>Great choice, mate!</h3>
               <p className={styles.description}>
-                You're still on the path to your dream role. <span className={styles.highlight}>Let's make it happen together!</span>
+                You&apos;re still on the path to your dream role. <span className={styles.highlight}>Let&apos;s make it happen together!</span>
               </p>
               <div className={styles.subscriptionDetails}>
                 <p className={styles.detailText}>
-                  You've got <strong>XX days</strong> left on your current plan.
+                  You&apos;ve got <strong>XX days</strong> left on your current plan.
                 </p>
                 <p className={styles.detailText}>
                   Starting from <strong>XX date</strong>, your monthly payment will be <strong>$12.50</strong>.

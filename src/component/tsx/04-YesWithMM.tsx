@@ -111,7 +111,7 @@ export default function YesWithMM({ isOpen, onClose, onBack }: YesWithMMProps) {
           <div className={styles.formTextSection}>
             <div className={styles.textContent}>
               <h3 className={styles.title}>
-                We helped you land the job, now let's help you secure your visa.
+                We helped you land the job, now let&apos;s help you secure your visa.
               </h3>
               
               <div className={styles.questionGroup}>

@@ -134,7 +134,7 @@ export function getResponsiveClass(
 }
 
 // Responsive image handling
-export function getResponsiveImage(src: string, size: 'mobile' | 'tablet' | 'desktop' = 'mobile'): string {
+export function getResponsiveImage(src: string, _size: 'mobile' | 'tablet' | 'desktop' = 'mobile'): string {
   // This can be extended to use different image sizes based on device
   // For now, return the original src
   return src;

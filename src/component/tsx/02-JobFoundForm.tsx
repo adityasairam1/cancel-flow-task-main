@@ -13,7 +13,7 @@ interface JobFoundFormProps {
 }
 
 export default function JobFoundForm({ isOpen, onClose, onBack, onContinue }: JobFoundFormProps) {
-  const { isMobile, isTablet, isDesktop, breakpoint } = useResponsive();
+  const { isMobile, isTablet } = useResponsive();
   const [formData, setFormData] = useState({
     foundWithMigrateMatch: '',
     rolesApplied: '',

@@ -46,15 +46,7 @@ export default function CancellationFlow({ isOpen, onClose, onBack, onGet50Off }
     }
   };
 
-  const handleCompleteCancellation = () => {
-    // Handle complete cancellation
-    console.log('Cancellation completed with reason:', selectedReason);
-    if (selectedReason === 'too-expensive' && amount) {
-      console.log('Maximum willing to pay:', amount);
-    }
-    setShowWarning(true);
-    onClose();
-  };
+
 
   const handlePopupClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -105,7 +97,7 @@ export default function CancellationFlow({ isOpen, onClose, onBack, onGet50Off }
         <div className={styles.content}>
           <div className={styles.textSection}>
             <div className={styles.textContent}>
-              <h3 className={styles.title}>What's the main reason for cancelling?</h3>
+              <h3 className={styles.title}>What&apos;s the main reason for cancelling?</h3>
               <p className={styles.description}>
                 Please take a minute to let us know why:
               </p>

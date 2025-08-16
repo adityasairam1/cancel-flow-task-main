@@ -96,7 +96,7 @@ export default function FeedbackForm({ isOpen, onClose, onBack, onContinue, onGe
               </h3>
               {showWarning && (
                 <div className={styles.warningMessage}>
-                  Mind letting us know why you're cancelling? It helps us understand your experience and improve the platform.*
+                  Mind letting us know why you&apos;re cancelling? It helps us understand your experience and improve the platform.*
                 </div>
               )}
               

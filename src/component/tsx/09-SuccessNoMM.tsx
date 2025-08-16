@@ -66,7 +66,7 @@ export default function SuccessNoMM({ isOpen, onClose, visaType, hasLawyer }: Su
           <div className={styles.textSection}>
             <div className={styles.textContent}>
               <h3 className={styles.title}>
-                Your cancellation's all sorted, mate, no more charges.
+                Your cancellation&apos;s all sorted, mate, no more charges.
               </h3>
               
               <div className={styles.profileContainer}>
@@ -84,13 +84,13 @@ export default function SuccessNoMM({ isOpen, onClose, visaType, hasLawyer }: Su
                 
                 <div className={styles.profileMessage}>
                   <p className={styles.messageText}>
-                    I'll be reaching out soon to help with the visa side of things.
+                    I&apos;ll be reaching out soon to help with the visa side of things.
                   </p>
                   <p className={styles.messageText}>
-                    We've got your back, whether it's questions, paperwork, or just figuring out your options.
+                    We&apos;ve got your back, whether it&apos;s questions, paperwork, or just figuring out your options.
                   </p>
                   <p className={styles.messageText}>
-                    Keep an eye on your inbox. I'll be in touch <span className={styles.underlined}>shortly</span>.
+                    Keep an eye on your inbox. I&apos;ll be in touch <span className={styles.underlined}>shortly</span>.
                   </p>
                 </div>
               </div>

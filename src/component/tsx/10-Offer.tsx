@@ -9,6 +9,7 @@ interface OfferProps {
   onClose: () => void;
   onBack: () => void;
   onNoThanks: () => void;
+  onGet50Off?: () => void;
 
   currentPrice?: number;
   downsellPrice?: number;

@@ -20,16 +20,15 @@ interface RateLimitStore {
 
 class RateLimiter {
   private store: RateLimitStore = {};
-  private config: RateLimitConfig;
+  public config: RateLimitConfig;
 
   constructor(config: RateLimitConfig) {
     this.config = {
-      windowMs: 15 * 60 * 1000, // 15 minutes default
-      maxRequests: 100, // 100 requests per window default
-      keyGenerator: (req: NextRequest) => req.ip || 'unknown',
-      skipSuccessfulRequests: false,
-      skipFailedRequests: false,
-      ...config
+      windowMs: config.windowMs ?? 15 * 60 * 1000, // 15 minutes default
+      maxRequests: config.maxRequests ?? 100, // 100 requests per window default
+      keyGenerator: config.keyGenerator ?? ((req: NextRequest) => getClientIP(req)),
+      skipSuccessfulRequests: config.skipSuccessfulRequests ?? false,
+      skipFailedRequests: config.skipFailedRequests ?? false
     };
   }
 
@@ -145,34 +144,36 @@ export const rateLimiters = {
 export function getClientIP(req: NextRequest): string {
   return req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
          req.headers.get('x-real-ip') ||
-         req.ip ||
          'unknown';
 }
 
 // Rate limiting middleware for Next.js API routes
 export function withRateLimit(
-  handler: (req: NextRequest, res: NextResponse) => Promise<NextResponse>,
+  handler: (req: NextRequest) => Promise<NextResponse>,
   limiter: RateLimiter = rateLimiters.api,
   keyGenerator?: (req: NextRequest) => string
 ) {
-  return async (req: NextRequest, res: NextResponse) => {
+  return async (req: NextRequest) => {
     const key = keyGenerator ? keyGenerator(req) : getClientIP(req);
     const result = limiter.check(key);
 
     if (!result.allowed) {
-      return res.status(429).json({
+      return NextResponse.json({
         error: 'Too many requests',
         message: 'Rate limit exceeded. Please try again later.',
         retryAfter: Math.ceil((result.resetTime - Date.now()) / 1000)
-      });
+      }, { status: 429 });
     }
 
+    // Call the handler and add rate limit headers to the response
+    const response = await handler(req);
+    
     // Add rate limit headers
-    res.setHeader('X-RateLimit-Limit', limiter.config.maxRequests);
-    res.setHeader('X-RateLimit-Remaining', result.remaining);
-    res.setHeader('X-RateLimit-Reset', new Date(result.resetTime).toISOString());
+    response.headers.set('X-RateLimit-Limit', limiter.config.maxRequests.toString());
+    response.headers.set('X-RateLimit-Remaining', result.remaining.toString());
+    response.headers.set('X-RateLimit-Reset', new Date(result.resetTime).toISOString());
 
-    return handler(req, res);
+    return response;
   };
 }
 

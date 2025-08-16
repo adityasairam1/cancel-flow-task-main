@@ -2,7 +2,7 @@
 // Secure API route for handling cancellation requests
 
 import { NextRequest, NextResponse } from 'next/server';
-import { withRateLimit, rateLimiters, getClientIP } from '@/lib/rate-limiter';
+import { rateLimiters, getClientIP } from '@/lib/rate-limiter';
 import { InputSanitizer } from '@/lib/input-sanitizer';
 import { csrfProtection } from '@/lib/csrf-protection';
 import { handleCancellationCompletion } from '@/lib/database-operations';
@@ -103,12 +103,36 @@ async function handleCancellation(req: NextRequest) {
   }
 }
 
-// Export the handler wrapped with security middleware
-export const POST = withRateLimit(
-  csrfProtection.middleware(handleCancellation),
-  cancellationRateLimiter,
-  getClientIP
-);
+// Export the handler with basic rate limiting
+export async function POST(req: NextRequest) {
+  // Apply rate limiting
+  const clientIP = getClientIP(req);
+  const rateLimitResult = cancellationRateLimiter.check(clientIP);
+  
+  if (!rateLimitResult.allowed) {
+    return NextResponse.json({
+      error: 'Too many requests',
+      message: 'Rate limit exceeded. Please try again later.',
+      retryAfter: Math.ceil((rateLimitResult.resetTime - Date.now()) / 1000)
+    }, { status: 429 });
+  }
+
+  // Call the handler function
+  const response = await handleCancellation(req);
+  
+  // Create a new response with the same body and status, but with rate limit headers
+  const responseWithHeaders = NextResponse.json(
+    await response.json(),
+    { status: response.status }
+  );
+  
+  // Add rate limit headers
+  responseWithHeaders.headers.set('X-RateLimit-Limit', cancellationRateLimiter.config.maxRequests.toString());
+  responseWithHeaders.headers.set('X-RateLimit-Remaining', rateLimitResult.remaining.toString());
+  responseWithHeaders.headers.set('X-RateLimit-Reset', new Date(rateLimitResult.resetTime).toISOString());
+  
+  return responseWithHeaders;
+}
 
 // GET endpoint for CSRF token generation
 export async function GET() {

@@ -49,11 +49,15 @@ export async function getOrAssignVariant(userId: string): Promise<ABTestResult> 
     // Generate new variant using cryptographically secure RNG
     const variant = generateSecureVariant();
     
+    // Get user's subscription to include subscription ID
+    const subscription = await getUserSubscription(userId);
+    
     // Create a new cancellation record with the assigned variant
     const { error: insertError } = await supabase
       .from('cancellations')
       .insert({
         user_id: userId,
+        subscription_id: subscription?.id,
         downsell_variant: variant,
         accepted_downsell: false,
         reason: null

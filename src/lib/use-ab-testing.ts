@@ -71,7 +71,7 @@ export function useABTesting(userId: string) {
     }
 
     initializeABTesting();
-  }, [userId]);
+  }, [userId, initializeABTesting]);
 
   const refreshABTesting = () => {
     initializeABTesting();

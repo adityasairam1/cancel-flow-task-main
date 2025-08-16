@@ -11,6 +11,7 @@ export interface CancellationData {
   acceptedDownsell: boolean;
   amount?: string;
   feedback?: string;
+  subscriptionId?: string;
 }
 
 /**
@@ -96,6 +97,7 @@ export async function createCancellationRecord(data: CancellationData): Promise<
         .from('cancellations')
         .insert({
           user_id: data.userId,
+          subscription_id: data.subscriptionId,
           downsell_variant: data.variant,
           reason: data.reason,
           accepted_downsell: data.acceptedDownsell
@@ -154,7 +156,8 @@ export async function handleDownsellAcceptance(userId: string, variant: 'A' | 'B
     const recordSuccess = await createCancellationRecord({
       userId,
       variant,
-      acceptedDownsell: true
+      acceptedDownsell: true,
+      subscriptionId: subscription.id
     });
 
     if (recordSuccess) {
@@ -183,6 +186,9 @@ export async function handleCancellationCompletion(
     // Update subscription status to pending_cancellation
     const statusUpdateSuccess = await updateSubscriptionStatus(userId, 'pending_cancellation');
     
+    // Get user's subscription to include subscription ID
+    const subscription = await getUserSubscription(userId);
+    
     // Create final cancellation record
     const recordSuccess = await createCancellationRecord({
       userId,
@@ -190,7 +196,8 @@ export async function handleCancellationCompletion(
       reason,
       acceptedDownsell: false,
       amount,
-      feedback
+      feedback,
+      subscriptionId: subscription?.id
     });
 
     if (statusUpdateSuccess && recordSuccess) {

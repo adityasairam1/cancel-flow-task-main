@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test 14-reasons Component</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        .test-button:hover {
+            background: #0056b3;
+        }
+        .debug-info {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>14-reasons Component Test</h1>
+        <p>This is a test page to verify the 14-reasons component functionality.</p>
+        
+        <div class="debug-info">
+            <h3>Debug Information:</h3>
+            <p>If you can see this page, the basic setup is working.</p>
+            <p>To test the component:</p>
+            <ol>
+                <li>Click the "Open Cancellation Reasons" button</li>
+                <li>Select "Platform not helpful"</li>
+                <li>You should see a text area appear below</li>
+                <li>The text area should have a character counter</li>
+                <li>Try typing less than 25 characters to see validation</li>
+            </ol>
+        </div>
+
+        <button class="test-button" onclick="openReasons()">Open Cancellation Reasons</button>
+        
+        <div id="component-container"></div>
+    </div>
+
+    <script>
+        // Simple test to verify the component structure
+        function openReasons() {
+            const container = document.getElementById('component-container');
+            container.innerHTML = `
+                <div style="border: 2px solid #007bff; padding: 20px; margin: 20px 0; border-radius: 8px;">
+                    <h3>Component Test Area</h3>
+                    <p>This simulates the 14-reasons component area.</p>
+                    <p>In the actual React app, you should see:</p>
+                    <ul>
+                        <li>A modal popup with "Subscription Cancellation" header</li>
+                        <li>Radio buttons for different cancellation reasons</li>
+                        <li>When "Platform not helpful" is selected, a text area should appear</li>
+                        <li>The text area should have a character counter showing "Min 25 characters (0/25)"</li>
+                        <li>Validation should show error if less than 25 characters are entered</li>
+                    </ul>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

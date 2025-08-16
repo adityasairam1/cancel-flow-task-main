@@ -13,7 +13,7 @@ import SubscriptionPopup from './12-SubscriptionPopup';
 import Reasons from './14-reasons';
 import Cancelled from './15-Cancelled';
 import { useABTesting } from '../../lib/use-ab-testing';
-import { getConfig, getPrimaryOffer, formatPrice } from '../../lib/config';
+import { getConfig, getPrimaryOffer } from '../../lib/config';
 import { useAnalytics, analytics } from '../../lib/analytics';
 import { useResponsive } from '../../lib/responsive';
 
@@ -43,8 +43,8 @@ export default function CancelPopup({ isOpen, onClose }: CancelPopupProps) {
   const { variant: abVariant, userSubscription, isLoading: isLoadingVariant, downsellPrice } = useABTesting(mockUserId);
   
   // Analytics and responsive hooks
-  const { track, trackCancellationFlow, trackABTest } = useAnalytics();
-  const { isMobile, isTablet, isDesktop, breakpoint } = useResponsive();
+  const { trackCancellationFlow } = useAnalytics();
+  const { isMobile, isTablet } = useResponsive();
   const config = getConfig();
 
 
@@ -201,8 +201,6 @@ export default function CancelPopup({ isOpen, onClose }: CancelPopupProps) {
 
   if (showOffer) {
     const currentPrice = userSubscription?.monthly_price || 2500;
-    const config = getConfig();
-    const primaryOffer = getPrimaryOffer(abVariant || 'A');
     
     return (
       <Offer 

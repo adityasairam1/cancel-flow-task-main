@@ -1,6 +1,7 @@
 // src/lib/analytics.ts
 // Analytics system for tracking user interactions and A/B test performance
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getConfig } from './config';
 
 export interface AnalyticsEvent {

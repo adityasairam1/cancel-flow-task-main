@@ -1,6 +1,8 @@
 import { getOrAssignVariant, calculateDownsellPrice, generateSecureVariant } from '../ab-testing'
 import { supabase } from '../supabase'
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 // Mock Supabase
 jest.mock('../supabase', () => ({
   supabase: {

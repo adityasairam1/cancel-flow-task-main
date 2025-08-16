@@ -73,7 +73,7 @@ export interface ValidationRules {
 const defaultConfig: AppConfig = {
   appName: process.env.NEXT_PUBLIC_APP_NAME || 'Migrate Mate',
   appVersion: process.env.NEXT_PUBLIC_APP_VERSION || '1.0.0',
-  environment: (process.env.NEXT_PUBLIC_APP_ENV as any) || 'development',
+  environment: (process.env.NEXT_PUBLIC_APP_ENV as 'development' | 'staging' | 'production') || 'development',
   
   enableABTesting: process.env.NEXT_PUBLIC_ENABLE_AB_TESTING === 'true',
   enableAnalytics: process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === 'true',

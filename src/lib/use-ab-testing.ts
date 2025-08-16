@@ -1,7 +1,7 @@
 // src/lib/use-ab-testing.ts
 // Custom hook for managing A/B testing state
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { getOrAssignVariant, calculateDownsellPrice, type ABVariant } from './ab-testing';
 import { getUserSubscription } from './database-operations';
 
@@ -22,16 +22,7 @@ export function useABTesting(userId: string) {
     downsellPrice: null
   });
 
-  useEffect(() => {
-    if (!userId) {
-      setState(prev => ({ ...prev, isLoading: false, error: 'No user ID provided' }));
-      return;
-    }
-
-    initializeABTesting();
-  }, [userId, initializeABTesting]);
-
-  const initializeABTesting = async () => {
+  const initializeABTesting = useCallback(async () => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
 
@@ -71,7 +62,16 @@ export function useABTesting(userId: string) {
         downsellPrice: null
       });
     }
-  };
+  }, [userId]);
+
+  useEffect(() => {
+    if (!userId) {
+      setState(prev => ({ ...prev, isLoading: false, error: 'No user ID provided' }));
+      return;
+    }
+
+    initializeABTesting();
+  }, [userId]);
 
   const refreshABTesting = () => {
     initializeABTesting();

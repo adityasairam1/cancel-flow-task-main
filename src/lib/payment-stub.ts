@@ -12,12 +12,19 @@ export interface PaymentResult {
  * This is just a stub - no real payment processing
  */
 export async function processDownsellPayment(
-  _userId: string, 
-  _originalPrice: number, 
-  _downsellPrice: number
+  userId: string, 
+  originalPrice: number, 
+  downsellPrice: number
 ): Promise<PaymentResult> {
   // Simulate processing delay
   await new Promise(resolve => setTimeout(resolve, 500));
+  
+  // Log the parameters for debugging/stub purposes
+  console.log('STUB: Processing downsell payment', {
+    userId,
+    originalPrice: `$${(originalPrice / 100).toFixed(2)}`,
+    downsellPrice: `$${(downsellPrice / 100).toFixed(2)}`
+  });
   
   // Always succeed for stub
   return {

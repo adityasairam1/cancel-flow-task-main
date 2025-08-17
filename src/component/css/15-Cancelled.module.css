@@ -395,15 +395,16 @@
 /* Mobile Responsive Design */
 @media (max-width: 768px) {
   .overlay {
-    padding: 1rem;
+    padding: 0.5rem;
   }
   
   .popup {
-    max-width: 100%;
+    max-width: 95%;
     margin: 0;
     border-radius: 1rem;
     min-height: auto;
-    max-height: 90vh;
+    max-height: 85vh;
+    width: 95%;
   }
   
   .content {
@@ -412,92 +413,14 @@
   
   .textSection {
     max-width: none;
-    padding: 1.5rem;
+    padding: 1rem;
   }
   
   .imageSection {
-    min-height: 200px;
-    max-height: 200px;
-    padding: 1rem;
-    order: -1;
-  }
-  
-  .image {
-    border-radius: 1rem;
-    box-shadow: 
-      0 15px 30px rgba(0, 0, 0, 0.15),
-      0 6px 12px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  }
-  
-  .headerTopRow {
-    flex-direction: column;
-    gap: 16px;
-    align-items: flex-start;
-  }
-  
-  .headerText {
-    text-align: left;
-  }
-  
-  .progressIndicator {
-    align-self: flex-end;
-  }
-  
-  .title {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .subtitle {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .subscriptionDetails {
-    margin: 1rem 0;
-  }
-  
-  .reactivationMessage {
-    margin: 1rem 0;
-  }
-  
-  .buttonGroup {
-    margin-top: 1.5rem;
-  }
-  
-  .backToJobsButton {
-    width: 100%;
-    padding: 1rem;
-  }
-}
-
-/* Extra small mobile devices */
-@media (max-width: 480px) {
-  .overlay {
-    padding: 0.5rem;
-  }
-  
-  .popup {
-    max-width: 100%;
-    margin: 0;
-    border-radius: 0.75rem;
-    max-height: 95vh;
-  }
-  
-  .header {
-    padding: 0.5rem 1rem;
-    min-height: 60px;
-  }
-  
-  .headerText {
-    font-size: 1rem;
-  }
-  
-  .imageSection {
-    min-height: 180px;
-    max-height: 180px;
+    min-height: 160px;
+    max-height: 160px;
     padding: 0.75rem;
+    order: -1;
   }
   
   .image {
@@ -508,20 +431,113 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
   
-  .textSection {
-    padding: 1rem;
+  .headerTopRow {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  
+  .headerText {
+    text-align: left;
+    font-size: 1rem;
+  }
+  
+  .progressIndicator {
+    align-self: flex-end;
   }
   
   .title {
     font-size: 1.125rem;
+    margin-bottom: 0.5rem;
   }
   
   .subtitle {
     font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .subscriptionDetails {
+    margin: 0.75rem 0;
+    padding: 0.5rem;
+  }
+  
+  .reactivationMessage {
+    margin: 0.75rem 0;
+    padding: 0.5rem;
+  }
+  
+  .buttonGroup {
+    margin-top: 1rem;
   }
   
   .backToJobsButton {
+    width: 100%;
     padding: 0.875rem;
     font-size: 0.9rem;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  .overlay {
+    padding: 0.25rem;
+  }
+  
+  .popup {
+    max-width: 98%;
+    margin: 0;
+    border-radius: 0.75rem;
+    max-height: 90vh;
+    width: 98%;
+  }
+  
+  .header {
+    padding: 0.5rem 0.75rem;
+    min-height: 50px;
+  }
+  
+  .headerText {
+    font-size: 0.9rem;
+  }
+  
+  .imageSection {
+    min-height: 140px;
+    max-height: 140px;
+    padding: 0.5rem;
+  }
+  
+  .image {
+    border-radius: 0.5rem;
+    box-shadow: 
+      0 8px 16px rgba(0, 0, 0, 0.15),
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .textSection {
+    padding: 0.75rem;
+  }
+  
+  .title {
+    font-size: 1rem;
+  }
+  
+  .subtitle {
+    font-size: 0.8rem;
+  }
+  
+  .subscriptionDetails {
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+  }
+  
+  .reactivationMessage {
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+  }
+  
+  .backToJobsButton {
+    padding: 0.75rem;
+    font-size: 0.85rem;
   }
 }

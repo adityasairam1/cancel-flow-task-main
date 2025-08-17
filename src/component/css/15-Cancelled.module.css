@@ -160,12 +160,17 @@
   letter-spacing: 0.025em;
   text-align: center;
   flex-grow: 1;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
 }
 
 .progressIndicator {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-left: auto;
 }
 
 .progressSteps {
@@ -442,18 +447,23 @@
   }
   
   .headerTopRow {
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-start;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
   }
   
   .headerText {
-    text-align: left;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 1rem;
+    z-index: 10;
   }
   
   .progressIndicator {
-    align-self: flex-end;
+    display: none;
   }
   
   .title {
@@ -508,6 +518,10 @@
   
   .headerText {
     font-size: 0.9rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
   }
   
   .imageSection {

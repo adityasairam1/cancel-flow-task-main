@@ -71,7 +71,7 @@
 
 .closeButton {
   position: absolute;
-  top: 1.5rem;
+  top: 0.75rem;
   right: 1.5rem;
   background: linear-gradient(135deg, 
     #dc2626 0%, 
@@ -446,6 +446,11 @@
     filter: brightness(1.05) contrast(1.1) saturate(1.1);
   }
   
+  .closeButton {
+    top: 0.75rem;
+    right: 1.5rem;
+  }
+  
   .headerTopRow {
     display: flex;
     align-items: center;
@@ -513,6 +518,11 @@
   .header {
     padding: 0.5rem 0.75rem;
     min-height: 45px;
+  }
+  
+  .closeButton {
+    top: 0.5rem;
+    right: 0.75rem;
   }
   
   .headerText {

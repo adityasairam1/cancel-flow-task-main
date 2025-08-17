@@ -347,27 +347,40 @@
 }
 
 @media (max-width: 768px) {
+  .overlay {
+    padding: 0;
+  }
+  
   .popup {
     max-width: 100%;
-    margin: 20px;
-    border-radius: 8px;
+    margin: 0;
+    border-radius: 0;
+    height: 100vh;
+    max-height: 100vh;
   }
   
   .content {
     flex-direction: column;
+    height: calc(100vh - 70px); /* Subtract header height */
   }
   
   .textSection {
     max-width: none;
-    padding: 24px;
+    padding: 1.5rem;
+    flex: 1;
+    overflow-y: auto;
   }
   
   .imageSection {
     min-height: 200px;
+    max-height: 200px;
+    padding: 0;
+    order: -1; /* Move to top */
   }
   
   .image {
-    border-radius: 0 0 8px 8px;
+    border-radius: 0;
+    object-fit: cover;
   }
   
   .headerTopRow {
@@ -384,5 +397,30 @@
     align-self: flex-end;
   }
   
-
+  .title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .subscriptionDetails {
+    margin: 1rem 0;
+  }
+  
+  .reactivationMessage {
+    margin: 1rem 0;
+  }
+  
+  .buttonGroup {
+    margin-top: 1.5rem;
+  }
+  
+  .backToJobsButton {
+    width: 100%;
+    padding: 1rem;
+  }
 }

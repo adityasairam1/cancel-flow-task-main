@@ -23,8 +23,8 @@ export default function Cancelled({
   if (!isOpen) return null;
 
   return (
-    <div className={styles.overlay} onClick={onClose}>
-      <div className={`${styles.popup} ${isMobile ? 'w-full h-full max-w-none rounded-none' : isTablet ? 'w-11/12 max-w-2xl rounded-lg' : 'w-4/5 max-w-4xl rounded-xl'}`} onClick={(e) => e.stopPropagation()}>
+    <div className={`${styles.overlay} ${isMobile ? 'p-0' : ''}`} onClick={onClose}>
+      <div className={`${styles.popup} ${isMobile ? 'w-screen h-screen max-w-none rounded-none shadow-none' : isTablet ? 'w-11/12 max-w-2xl rounded-lg' : 'w-4/5 max-w-4xl rounded-xl'}`} onClick={(e) => e.stopPropagation()}>
         <button 
           className={styles.closeButton} 
           onClick={onClose}
@@ -66,7 +66,7 @@ export default function Cancelled({
                 <img 
                   src="/image/empire.jpg" 
                   alt="Empire State Building at twilight" 
-                  className={`${styles.image} ${isMobile ? 'object-cover h-full w-full rounded-t-lg' : ''}`}
+                  className={`${styles.image} ${isMobile ? 'object-cover h-full w-full rounded-none' : ''}`}
                 />
               </div>
               

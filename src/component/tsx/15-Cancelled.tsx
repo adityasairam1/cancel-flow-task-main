@@ -23,8 +23,8 @@ export default function Cancelled({
   if (!isOpen) return null;
 
   return (
-    <div className={`${styles.overlay} ${isMobile ? 'p-0' : ''}`} onClick={onClose}>
-      <div className={`${styles.popup} ${isMobile ? 'w-screen h-screen max-w-none rounded-none shadow-none' : isTablet ? 'w-11/12 max-w-2xl rounded-lg' : 'w-4/5 max-w-4xl rounded-xl'}`} onClick={(e) => e.stopPropagation()}>
+    <div className={styles.overlay} onClick={onClose}>
+      <div className={`${styles.popup} ${isMobile ? 'w-full max-w-none' : isTablet ? 'w-11/12 max-w-2xl' : 'w-4/5 max-w-4xl'}`} onClick={(e) => e.stopPropagation()}>
         <button 
           className={styles.closeButton} 
           onClick={onClose}
@@ -62,18 +62,18 @@ export default function Cancelled({
           {/* For mobile: Image at top, text below */}
           {isMobile ? (
             <>
-              <div className={`${styles.imageSection} ${isMobile ? 'w-full h-48 order-first' : ''}`}>
+              <div className={styles.imageSection}>
                 <img 
                   src="/image/empire.jpg" 
                   alt="Empire State Building at twilight" 
-                  className={`${styles.image} ${isMobile ? 'object-cover h-full w-full rounded-none' : ''}`}
+                  className={styles.image}
                 />
               </div>
               
-              <div className={`${styles.textSection} ${isMobile ? 'w-full order-last' : ''}`}>
+              <div className={styles.textSection}>
                 <div className={styles.textContent}>
-                  <h2 className={`${styles.title} ${isMobile ? 'text-xl' : ''}`}>Sorry to see you go, mate.</h2>
-                  <p className={`${styles.subtitle} ${isMobile ? 'text-base' : ''}`}>
+                  <h2 className={styles.title}>Sorry to see you go, mate.</h2>
+                  <p className={styles.subtitle}>
                     Thanks for being with us, and you&apos;re always welcome back.
                   </p>
                   
@@ -89,7 +89,7 @@ export default function Cancelled({
                 
                 <div className={styles.buttonGroup}>
                   <button 
-                    className={`${styles.backToJobsButton} ${isMobile ? 'w-full' : ''}`}
+                    className={styles.backToJobsButton}
                     onClick={onClose}
                   >
                     Back to Jobs

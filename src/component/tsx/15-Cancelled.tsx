@@ -45,14 +45,16 @@ export default function Cancelled({
               </button>
             )}
             <span className={styles.headerText}>Subscription Cancellation</span>
-            <div className={styles.progressIndicator}>
-              <div className={styles.progressSteps}>
-                <div className={`${styles.step} ${styles.completed}`}></div>
-                <div className={`${styles.step} ${styles.completed}`}></div>
-                <div className={`${styles.step} ${styles.completed}`}></div>
+            {!isMobile && (
+              <div className={styles.progressIndicator}>
+                <div className={styles.progressSteps}>
+                  <div className={`${styles.step} ${styles.completed}`}></div>
+                  <div className={`${styles.step} ${styles.completed}`}></div>
+                  <div className={`${styles.step} ${styles.completed}`}></div>
+                </div>
+                <span className={styles.stepText}>Completed</span>
               </div>
-              <span className={styles.stepText}>Completed</span>
-            </div>
+            )}
           </div>
         </div>
         

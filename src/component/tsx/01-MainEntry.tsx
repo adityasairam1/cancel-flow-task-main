@@ -14,7 +14,6 @@ import Reasons from './14-reasons';
 import Cancelled from './15-Cancelled';
 import { useABTesting } from '../../lib/use-ab-testing';
 import { getConfig } from '../../lib/config';
-import { useAnalytics, analytics } from '../../lib/analytics';
 import { useResponsive } from '../../lib/responsive';
 
 interface CancelPopupProps {
@@ -42,8 +41,7 @@ export default function CancelPopup({ isOpen, onClose }: CancelPopupProps) {
   const mockUserId = '550e8400-e29b-41d4-a716-446655440001';
   const { variant: abVariant, userSubscription, isLoading: isLoadingVariant, downsellPrice } = useABTesting(mockUserId);
   
-  // Analytics and responsive hooks
-  const { trackCancellationFlow } = useAnalytics();
+  // Responsive hooks
   const { isMobile, isTablet } = useResponsive();
   const config = getConfig();
 
@@ -51,22 +49,16 @@ export default function CancelPopup({ isOpen, onClose }: CancelPopupProps) {
 
 
 
-  // Initialize analytics when component mounts
+  // Initialize component when it mounts
   useEffect(() => {
     if (isOpen && abVariant && userSubscription) {
-      analytics.initialize({
+      console.log('Cancellation popup opened:', {
         userId: mockUserId,
-        variant: abVariant,
-        subscriptionPrice: userSubscription.monthly_price,
-        userType: 'returning'
-      });
-      
-      trackCancellationFlow('popup_opened', {
         variant: abVariant,
         subscriptionPrice: userSubscription.monthly_price
       });
     }
-  }, [isOpen, abVariant, userSubscription, trackCancellationFlow]);
+  }, [isOpen, abVariant, userSubscription]);
 
   // Reset to main screen whenever popup is closed
   useEffect(() => {
@@ -302,7 +294,7 @@ export default function CancelPopup({ isOpen, onClose }: CancelPopupProps) {
               <button 
                 className={`${styles.yesButton} ${isMobile ? 'px-4 py-3 text-sm' : isTablet ? 'px-6 py-3 text-base' : 'px-8 py-4 text-lg'}`}
                 onClick={() => {
-                  trackCancellationFlow('job_found_clicked');
+                  console.log('Job found clicked');
                   setShowJobForm(true);
                 }}
               >
@@ -311,7 +303,7 @@ export default function CancelPopup({ isOpen, onClose }: CancelPopupProps) {
               <button 
                 className={`${styles.noButton} ${isMobile ? 'px-4 py-3 text-sm' : isTablet ? 'px-6 py-3 text-base' : 'px-8 py-4 text-lg'}`}
                 onClick={() => {
-                  trackCancellationFlow('still_looking_clicked', { variant: abVariant });
+                  console.log('Still looking clicked, variant:', abVariant);
                   // Always go to offer page first for "Not yet" users
                   setShowOffer(true);
                 }}

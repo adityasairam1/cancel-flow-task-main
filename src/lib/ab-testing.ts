@@ -1,8 +1,6 @@
 // src/lib/ab-testing.ts
 // Deterministic A/B testing implementation for subscription cancellation flow
 
-import { supabase } from './supabase';
-
 export type ABVariant = 'A' | 'B';
 
 interface ABTestResult {
@@ -13,69 +11,38 @@ interface ABTestResult {
 /**
  * Get or assign A/B test variant for a user
  * Uses cryptographically secure RNG for new assignments
- * Always returns the same variant for repeat visits
+ * Simplified to use localStorage for persistence as required
  */
 export async function getOrAssignVariant(userId: string): Promise<ABTestResult> {
   try {
-    // First, check if user already has a variant assigned
-    const { data: existingCancellation, error: fetchError } = await supabase
-      .from('cancellations')
-      .select('downsell_variant')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: false })
-      .limit(1);
-
-    if (fetchError) {
-      console.error('Error fetching existing variant:', fetchError);
-      // If it's a connection error, use mock data
-      if (fetchError.message?.includes('fetch') || fetchError.message?.includes('network')) {
-        console.warn('Database connection failed, using mock variant assignment');
+    // Check if we're in a browser environment
+    if (typeof window !== 'undefined') {
+      const storageKey = `ab-variant-${userId}`;
+      const existingVariant = localStorage.getItem(storageKey);
+      
+      if (existingVariant && (existingVariant === 'A' || existingVariant === 'B')) {
         return {
-          variant: generateSecureVariant(),
-          isNewAssignment: true
+          variant: existingVariant as ABVariant,
+          isNewAssignment: false
         };
       }
-      throw fetchError;
-    }
-
-    // If user already has a variant, return it
-    if (existingCancellation && existingCancellation.length > 0) {
+      
+      // Generate new variant using cryptographically secure RNG
+      const variant = generateSecureVariant();
+      
+      // Store in localStorage for persistence
+      localStorage.setItem(storageKey, variant);
+      
+      console.log('New A/B variant assigned:', { userId, variant });
+      
       return {
-        variant: existingCancellation[0].downsell_variant as ABVariant,
-        isNewAssignment: false
+        variant,
+        isNewAssignment: true
       };
     }
-
-    // Generate new variant using cryptographically secure RNG
+    
+    // Server-side fallback
     const variant = generateSecureVariant();
-    
-    // Get user's subscription to include subscription ID
-    const subscription = await getUserSubscription(userId);
-    
-    // Create a new cancellation record with the assigned variant
-    const { error: insertError } = await supabase
-      .from('cancellations')
-      .insert({
-        user_id: userId,
-        subscription_id: subscription?.id,
-        downsell_variant: variant,
-        accepted_downsell: false,
-        reason: null
-      });
-
-    if (insertError) {
-      console.error('Error persisting variant:', insertError);
-      // If it's a connection error, still return the variant but don't persist
-      if (insertError.message?.includes('fetch') || insertError.message?.includes('network')) {
-        console.warn('Database connection failed, returning variant without persistence');
-        return {
-          variant,
-          isNewAssignment: true
-        };
-      }
-      throw insertError;
-    }
-
     return {
       variant,
       isNewAssignment: true
@@ -112,13 +79,18 @@ function generateSecureVariant(): ABVariant {
 
 /**
  * Get user's current subscription details for A/B testing
- * This function is now deprecated in favor of the one in database-operations.ts
- * Keeping for backward compatibility
+ * Simplified to return mock data as required
  */
 export async function getUserSubscription(userId: string) {
-  // Import the function from database-operations to avoid duplication
-  const { getUserSubscription: getSubscription } = await import('./database-operations');
-  return getSubscription(userId);
+  // Return mock subscription data as required
+  return {
+    id: 'mock-subscription-id',
+    user_id: userId,
+    monthly_price: 2500, // $25.00
+    status: 'active',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
+  };
 }
 
 /**

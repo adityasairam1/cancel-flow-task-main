@@ -1,55 +1,30 @@
 // src/lib/payment-stub.ts
-// Payment processing stub for downsell acceptance
+// Simple payment stub for downsell processing
 
-export interface PaymentStubResult {
+export interface PaymentResult {
   success: boolean;
   transactionId?: string;
   error?: string;
 }
 
 /**
- * Stub payment processing for downsell acceptance
- * In a real implementation, this would integrate with Stripe, PayPal, etc.
+ * Simple payment stub for downsell processing
+ * This is just a stub - no real payment processing
  */
 export async function processDownsellPayment(
-  userId: string,
-  originalPrice: number,
+  userId: string, 
+  originalPrice: number, 
   downsellPrice: number
-): Promise<PaymentStubResult> {
-  try {
-    // Simulate payment processing delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Generate mock transaction ID
-    const transactionId = `txn_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    
-    console.log('STUB: Payment processing completed', {
-      userId,
-      originalPrice: `$${(originalPrice / 100).toFixed(2)}`,
-      downsellPrice: `$${(downsellPrice / 100).toFixed(2)}`,
-      discount: `$${((originalPrice - downsellPrice) / 100).toFixed(2)}`,
-      transactionId
-    });
-    
-    // Simulate 95% success rate
-    if (Math.random() > 0.05) {
-      return {
-        success: true,
-        transactionId
-      };
-    } else {
-      return {
-        success: false,
-        error: 'Payment processing failed (stub simulation)'
-      };
-    }
-  } catch (error) {
-    console.error('STUB: Payment processing error:', error);
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : 'Unknown payment error'
-    };
-  }
+): Promise<PaymentResult> {
+  // Simulate processing delay
+  await new Promise(resolve => setTimeout(resolve, 500));
+  
+  // Always succeed for stub
+  return {
+    success: true,
+    transactionId: `mock-transaction-${Date.now()}`,
+    error: null
+  };
 }
 
 /**

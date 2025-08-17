@@ -6,7 +6,6 @@ import { rateLimiters, getClientIP } from '@/lib/rate-limiter';
 import { InputSanitizer } from '@/lib/input-sanitizer';
 import { csrfProtection } from '@/lib/csrf-protection';
 import { handleCancellationCompletion } from '@/lib/database-operations';
-import { analytics } from '@/lib/analytics';
 
 // Rate limiting configuration for cancellation endpoint
 const cancellationRateLimiter = rateLimiters.cancellation;
@@ -71,16 +70,13 @@ async function handleCancellation(req: NextRequest) {
       );
     }
 
-    // 6. Track analytics
-    analytics.trackCancellationComplete(
-      sanitizedData.reason,
-      false,
-      {
-        variant: sanitizedData.variant,
-        userId: sanitizedData.userId,
-        amount: sanitizedData.amount
-      }
-    );
+    // 6. Log cancellation completion
+    console.log('Cancellation completed:', {
+      reason: sanitizedData.reason,
+      variant: sanitizedData.variant,
+      userId: sanitizedData.userId,
+      amount: sanitizedData.amount
+    });
 
     // 7. Return success response
     return NextResponse.json({

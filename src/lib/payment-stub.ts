@@ -4,7 +4,7 @@
 export interface PaymentResult {
   success: boolean;
   transactionId?: string;
-  error?: string;
+  error?: string | null;
 }
 
 /**
@@ -12,9 +12,9 @@ export interface PaymentResult {
  * This is just a stub - no real payment processing
  */
 export async function processDownsellPayment(
-  userId: string, 
-  originalPrice: number, 
-  downsellPrice: number
+  _userId: string, 
+  _originalPrice: number, 
+  _downsellPrice: number
 ): Promise<PaymentResult> {
   // Simulate processing delay
   await new Promise(resolve => setTimeout(resolve, 500));

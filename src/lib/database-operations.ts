@@ -1,7 +1,6 @@
 // src/lib/database-operations.ts
 // Database operations for subscription cancellation flow
 
-import { supabase } from './supabase';
 import { processDownsellPayment } from './payment-stub';
 
 export interface CancellationData {
